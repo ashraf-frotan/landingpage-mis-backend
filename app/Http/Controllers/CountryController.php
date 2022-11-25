@@ -11,7 +11,7 @@ class CountryController extends Controller
     public function index()
     {
         $countries=Country::all();
-        return response()->json(['data'=>$countries,'status'=>true,'message'=>'Success']);
+        return response()->json($countries);
     }
 
     // Store
@@ -23,7 +23,7 @@ class CountryController extends Controller
             'phonecode'=>'required|min:2',
         ]);
         $country=Country::create($data);
-        return response()->json(['data'=>$country,'status'=>true,'message'=>'Country inserted successfully!']);
+        return response()->json($country);
     }
 
     // Updated

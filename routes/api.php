@@ -6,6 +6,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PageTypeController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,6 @@ Route::resource('country',CountryController::class);
 Route::resource('company',CompanyController::class);
 Route::resource('page_type',PageTypeController::class);
 Route::resource('template',TemplateController::class);
+Route::resource('product',ProductController::class);
 
 

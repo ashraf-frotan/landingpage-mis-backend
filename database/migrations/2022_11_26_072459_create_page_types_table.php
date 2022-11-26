@@ -15,6 +15,9 @@ class CreatePageTypesTable extends Migration
     {
         Schema::create('page_types', function (Blueprint $table) {
             $table->id();
+            $table->string('name',64);
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->timestamps();
         });
     }

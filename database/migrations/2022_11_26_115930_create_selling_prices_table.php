@@ -15,6 +15,10 @@ class CreateSellingPricesTable extends Migration
     {
         Schema::create('selling_prices', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id');
+            $table->integer('quantity');
+            $table->float('price');
+            $table->float('old_price');
             $table->timestamps();
         });
     }

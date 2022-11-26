@@ -27,8 +27,8 @@ class CompanyController extends Controller
             $ext=$file->getClientOriginalExtension();
             $new_name=time().'.'.$ext;
             $file->move('assets/images/logo',$new_name);
+            $data['logo']=$new_name;
         }
-        $data['logo']=$new_name;
         $company=Company::create($data);
         return response()->json($company);
     }

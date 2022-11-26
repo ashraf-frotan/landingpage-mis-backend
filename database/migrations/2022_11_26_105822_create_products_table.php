@@ -26,6 +26,8 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('page_status')->default(0)->comment('[0=>registerd, 1=>published, 2=>unpublished]');
             $table->tinyInteger('page_language')->default(1)->comment('[0=>both, 1=>arabic, 2=>english]');
             $table->boolean('is_collection')->default(0);
+            $table->unsignedBigInteger('template_id');
+            $table->foreign('template_id')->references('id')->on('templates');
             $table->timestamps();
         });
     }

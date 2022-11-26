@@ -26,7 +26,7 @@ class CountryController extends Controller
         return response()->json($country);
     }
 
-    // Updated
+    // Update
     public function update(Request $request,$id)
     {
         $data=$request->validate([
@@ -36,13 +36,13 @@ class CountryController extends Controller
         ]);
         $country=Country::find($id);
         $country->update($data);
-        return response()->json(['data'=>$country,'status'=>true,'message'=>'Country inserted successfully!']);
+        return response()->json($country);
     }
 
     // Destroy
     public function destroy($id)
     {
         $country=Country::find($id)->delete();
-        return response()->json(['data'=>$country,'status'=>true,'message'=>'Country deleted successfully!']);
+        return response()->json($country);
     }
 }

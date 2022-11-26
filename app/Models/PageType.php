@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PageType extends Model
 {
     use HasFactory;
+    protected $fillable = ['name','company_id'];
 }

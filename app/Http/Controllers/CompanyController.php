@@ -3,30 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Company;
+use File;
 class CompanyController extends Controller
 {
     // Index
     public function index()
     {
-        # code...
+        $companies=Company::all();
+        return response()->json($companies);
     }
 
     // Store
     public function store(Request $request)
     {
-        # code...
+        $data=$request->validate([
+            'name'=>'required|min:3',
+            'logo'=>'required',
+            'country_id'=>'required'
+        ]);
+        if($request->hasFile('logo')){
+            $file=$request->file('logo');
+            $ext=$file->getClientOriginalExtension();
+            $new_name=time().'.'.$ext;
+            $file->move('assets/images/logo',$new_name);
+        }
+        $data['logo']=$new_name;
+        $company=Company::create($data);
+        return response()->json($company);
     }
 
     // Update
     public function update(Request $request,$id)
     {
-        # code...
+        $data=$request->validate([
+            'name'=>'required|min:3',
+            'logo'=>'required',
+            'country_id'=>'required'
+        ]);
+        $company=Company::find($id);
+        if($request->hasFile('logo')){
+            if($company->logo!=''){
+                File::delete('assets/images/logo/'.$company->logo);
+            }
+            $file=$request->file('logo');
+            $ext=$file->getClientOriginalExtension();
+            $new_name=time().'.'.$ext;
+            $file->move('assets/images/logo',$new_name);
+        }
+        $data['logo']=$new_name;
+        $company->update($data);
+        return response()->json($company);
     }
 
     // Destroy
-    public function destroy()
+    public function destroy($id)
     {
-        # code...
+        $company=Company::find($id);
+        if($company->logo!=''){
+            File::delete('assets/images/logo/'.$company->logo);
+        }
+        $company->delete();
+        return response()->json($company);
     }
 }

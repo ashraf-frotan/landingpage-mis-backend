@@ -7,6 +7,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PageTypeController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,6 @@ Route::resource('company',CompanyController::class);
 Route::resource('page_type',PageTypeController::class);
 Route::resource('template',TemplateController::class);
 Route::resource('product',ProductController::class);
+Route::resource('sub_product',SubProductController::class);
 
 

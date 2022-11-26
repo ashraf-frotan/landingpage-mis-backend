@@ -15,6 +15,9 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->string('name',64);
+            $table->unsignedBigInteger('country_id');
+            $table->foreign('country_id')->references('id')->on('companies');
             $table->timestamps();
         });
     }

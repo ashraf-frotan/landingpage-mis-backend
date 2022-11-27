@@ -41,8 +41,9 @@ class CountryController extends Controller
     }
 
     // Destroy
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
+        return response()->json($request->all());
         $country=Country::find($id)->delete();
         return response()->json($country);
     }

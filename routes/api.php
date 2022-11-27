@@ -25,6 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('country',CountryController::class);
+Route::get('search_country',[CountryController::class,'search']);
+
 Route::resource('company',CompanyController::class);
 Route::resource('page_type',PageTypeController::class);
 Route::resource('template',TemplateController::class);

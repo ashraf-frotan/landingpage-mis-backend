@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use Illuminate\Http\Request;
+use DB;
 
 class CountryController extends Controller
 {
@@ -44,5 +45,25 @@ class CountryController extends Controller
     {
         $country=Country::find($id)->delete();
         return response()->json($country);
+    }
+
+    // Search
+    public function search(Request $request)
+    {
+        $countries=DB::table('countries');
+        if($request->id!=''){
+            $countries->where('id','like',$request->id);
+        }
+        if($request->code!=''){
+            $countries->where('id','like',"%$request->id%");
+        }
+        if($request->name!=''){
+            $countries->where('id','like',"%$request->name%");
+        }
+        if($request->phonecode!=''){
+            $countries->where('id','like',"%$request->phonecode%");
+        }
+        $countries->get();
+        return response()->json($countries);
     }
 }

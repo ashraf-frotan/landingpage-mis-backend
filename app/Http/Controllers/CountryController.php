@@ -50,20 +50,11 @@ class CountryController extends Controller
     // Search
     public function search(Request $request)
     {
-        $countries=DB::table('countries');
-        if($request->id!=''){
-            $countries->where('id','like',$request->id);
-        }
-        if($request->code!=''){
-            $countries->where('id','like',"%$request->id%");
-        }
-        if($request->name!=''){
-            $countries->where('id','like',"%$request->name%");
-        }
-        if($request->phonecode!=''){
-            $countries->where('id','like',"%$request->phonecode%");
-        }
-        $countries->get();
+        $countries=Country::where('id','like',"%$request->id%")
+        ->where('code','like',"%$request->code%")
+        ->where('name','like',"%$request->name%")
+        ->where('phonecode','like',"%$request->phonecode%")
+        ->get();
         return response()->json($countries);
     }
 }

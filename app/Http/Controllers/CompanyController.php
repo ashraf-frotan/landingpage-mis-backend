@@ -70,6 +70,14 @@ class CompanyController extends Controller
     // Search
     public function search(Request $request)
     {
-       
+       $query=DB::table('companies');
+       if($request->id!=''){
+        $query->where('id',$request->id);
+       }
+       if($request->country_id!=''){
+        $query->where('country_id',$request->id);
+       }
+       $companies=$query->orWhere('name','like',"%$request->name%")->get();
+       return response()->json($companies);
     }
 }

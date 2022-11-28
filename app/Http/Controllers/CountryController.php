@@ -50,8 +50,11 @@ class CountryController extends Controller
     // Search
     public function search(Request $request)
     {
-        $countries=Country::where('id','like',"%$request->id%")
-        ->where('code','like',"%$request->code%")
+        $query=DB::table('countries');
+        if($request->id!=''){
+            $query->where('id',$request->id);
+        }
+        $countries=$query->where('code','like',"%$request->code%")
         ->where('name','like',"%$request->name%")
         ->where('phonecode','like',"%$request->phonecode%")
         ->get();

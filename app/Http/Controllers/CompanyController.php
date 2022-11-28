@@ -66,4 +66,10 @@ class CompanyController extends Controller
         $company->delete();
         return response()->json($company);
     }
+
+    // Search
+    public function search(Request $request)
+    {
+       
+    }
 }

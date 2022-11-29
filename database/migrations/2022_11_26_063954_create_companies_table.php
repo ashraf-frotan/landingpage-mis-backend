@@ -18,7 +18,7 @@ class CreateCompaniesTable extends Migration
             $table->string('name',64);
             $table->string('logo',64);
             $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('companies');
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->timestamps();
         });
     }

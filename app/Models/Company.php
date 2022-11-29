@@ -14,4 +14,8 @@ class Company extends Model
     {
         return env("APP_URL") . '/assets/images/logo/'.$value;
     } 
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
 }

@@ -30,6 +30,7 @@ class CompanyController extends Controller
             $data['logo']=$new_name;
         }
         $company=Company::create($data);
+        $company=Company::with('country')->where('id',$company->id)->first();
         return response()->json($company);
     }
 

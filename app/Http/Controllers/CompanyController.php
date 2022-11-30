@@ -37,9 +37,9 @@ class CompanyController extends Controller
     // Update
     public function update(Request $request,$id)
     {
+        return $request->all();
         $data=$request->validate([
             'name'=>'required|min:3',
-            'logo'=>'required',
             'country_id'=>'required'
         ]);
         $company=Company::find($id);

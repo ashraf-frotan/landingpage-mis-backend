@@ -57,14 +57,15 @@ class CompanyController extends Controller
     }
 
     // Destroy
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        $company=Company::find($id);
-        if($company->logo!=''){
-            File::delete('assets/images/logo/'.$company->logo);
+        $companies=Company::whereIn('id',$request->all())->delete();
+        foreach($companies as $company){
+            if($company->logo!=''){
+                File::delete('assets/images/logo/'.$company->logo);
+            }
         }
-        $company->delete();
-        return response()->json($company);
+        return response()->json($companies);
     }
 
     // Search

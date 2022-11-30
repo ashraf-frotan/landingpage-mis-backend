@@ -44,7 +44,7 @@ class CompanyController extends Controller
         $company=Company::find($id);
         if($request->hasFile('logo')){
             if($company->logo!=''){
-                File::delete('assets/images/logo/'.$company->logo);
+                File::delete('assets/images/logo/'.$this->fileName($company->logo));
             }
             $file=$request->file('logo');
             $ext=$file->getClientOriginalExtension();

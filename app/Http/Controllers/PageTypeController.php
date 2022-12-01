@@ -10,7 +10,7 @@ class PageTypeController extends Controller
     // Index
     public function index()
     {
-        $page_types=PageType::all();
+        $page_types=PageType::with('company')->get();
         return response()->json($page_types);
     }
 

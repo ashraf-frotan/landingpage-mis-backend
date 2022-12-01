@@ -22,6 +22,7 @@ class PageTypeController extends Controller
             'company_id'=>'required',
         ]);
         $page_type=PageType::create($data);
+        $page_type=PageType::with('company')->where('id',$page_type->id)->first();
         return response()->json($page_type);
     }
 

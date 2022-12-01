@@ -39,9 +39,9 @@ class PageTypeController extends Controller
     }
 
     // Destroy
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        $page_type=PageType::find($id)->delete();
+        $page_type=PageType::whereIn('id',$request->all())->delete();
         return response()->json($page_type);
     }
 }

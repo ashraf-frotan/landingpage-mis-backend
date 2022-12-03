@@ -31,6 +31,6 @@ Route::resource('template',TemplateController::class);
 Route::resource('product',ProductController::class);
 Route::resource('sub_product',SubProductController::class);
 
-Route::get('search_country',[CountryController::class,'search']);
-Route::get('search_company',[CompanyController::class,'search']);
-
+Route::get('filter_country',[CountryController::class,'filter']);
+Route::get('filter_company',[CompanyController::class,'filter']);
+Route::get('filter_page_types',[PageTypeController::class,'filter']);

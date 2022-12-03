@@ -47,8 +47,8 @@ class CountryController extends Controller
         return response()->json($country);
     }
 
-    // Search
-    public function search(Request $request)
+    // Filter
+    public function filter(Request $request)
     {
         $query=DB::table('countries');
         if($request->id!=''){

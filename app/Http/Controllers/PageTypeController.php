@@ -44,4 +44,10 @@ class PageTypeController extends Controller
         $page_type=PageType::whereIn('id',$request->all())->delete();
         return response()->json($page_type);
     }
+
+    // Filter
+    public function filter(Request $request)
+    {
+        # code...
+    }
 }

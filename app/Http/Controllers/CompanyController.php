@@ -70,8 +70,8 @@ class CompanyController extends Controller
         return response()->json($companies);
     }
 
-    // Search
-    public function search(Request $request)
+    // Filter
+    public function filter(Request $request)
     {
        $query=DB::table('companies');
        if($request->id!=''){

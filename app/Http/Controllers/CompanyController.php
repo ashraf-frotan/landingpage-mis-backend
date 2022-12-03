@@ -73,14 +73,14 @@ class CompanyController extends Controller
     // Filter
     public function filter(Request $request)
     {
-       $query=DB::table('companies');
+       $query=Company::query()->with('country');
        if($request->id!=''){
         $query->where('id',$request->id);
        }
        if($request->country_id!=''){
-        $query->where('country_id',$request->id);
+        $query->where('country_id',$request->country_id);
        }
-       $companies=$query->orWhere('name','like',"%$request->name%")->get();
+       $companies=$query->where('name','like',"%$request->name%")->get();
        return response()->json($companies);
     }
 

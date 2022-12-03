@@ -50,7 +50,7 @@ class CountryController extends Controller
     // Filter
     public function filter(Request $request)
     {
-        $query=DB::table('countries');
+        $query=Country::query();
         if($request->id!=''){
             $query->where('id',$request->id);
         }

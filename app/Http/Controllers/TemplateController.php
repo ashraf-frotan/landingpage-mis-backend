@@ -60,13 +60,22 @@ class TemplateController extends Controller
     }
 
     // Destroy
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        $template=Template::find($id);
-        if($template->image!=''){
-            File::delete('assets/images/image/'.$template->image);
+        $templates=Template::whereIn('id',$request->all())->get();
+        foreach($templates as $template){
+            if($template->image!=''){
+                File::delete('assets/images/image/'.$this->fileName($template->image));
+            }
         }
-        $template->delete();
-        return response()->json($template);
+        $templates=Template::whereIn('id',$request->all())->delete();
+        return response()->json($templates);
+    }
+
+    // get file name
+    public function fileName($path)
+    {
+        $pos=strripos($path,'/');
+        return substr($path,$pos+1);
     }
 }

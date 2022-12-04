@@ -33,4 +33,4 @@ Route::resource('sub_product',SubProductController::class);
 
 Route::get('filter_country',[CountryController::class,'filter']);
 Route::get('filter_company',[CompanyController::class,'filter']);
-Route::get('filter_page_types',[PageTypeController::class,'filter']);
+Route::get('filter_page_type',[PageTypeController::class,'filter']);

@@ -72,6 +72,19 @@ class TemplateController extends Controller
         return response()->json($templates);
     }
 
+    // Filter
+    public function filter(Request $request){
+        $query=Template::query()->with('pageType');
+        if($request->id!=''){
+            $query->where('id',$request->id);
+        }
+        if($request->page_type_id!=''){
+            $query->where('page_type_id',$request->page_type_id);
+        }
+        $templates=$query->where('name','like',"%$request->name%")->where('phone','like',"%$request->phone%")->get();
+        return response()->json($templates);
+    }
+
     // get file name
     public function fileName($path)
     {

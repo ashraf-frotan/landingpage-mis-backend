@@ -48,6 +48,14 @@ class PageTypeController extends Controller
     // Filter
     public function filter(Request $request)
     {
-        # code...
+        $query=PageType::query()->with('company');
+        if($request->id!=''){
+            $query->where('id',$request->id);
+        }
+        if($request->company_id!=''){
+            $query->where('company_id',$request->company_id);
+        }
+        $page_types=$query->where('name','like',"%$request->name%")->get();
+        return response()->json($page_types);
     }
 }

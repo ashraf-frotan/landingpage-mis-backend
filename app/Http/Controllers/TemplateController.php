@@ -11,7 +11,7 @@ class TemplateController extends Controller
     // Index
     public function index()
     {
-        $templates=Template::all();
+        $templates=Template::with('pageType')->get();
         return response()->json($templates);
     }
 

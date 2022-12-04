@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Template extends Model
 {
     use HasFactory;
+
+    function pageType(){
+        return $this->belongsTo(PageType::class);
+    }
 }

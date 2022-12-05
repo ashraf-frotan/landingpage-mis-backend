@@ -32,6 +32,7 @@ class TemplateController extends Controller
             $data['image']=$new_name;
         }
         $template=Template::create($data);
+        $template=Template::with('pageType')->where('id',$template->id)->first();
         return response()->json($template);
     }
 

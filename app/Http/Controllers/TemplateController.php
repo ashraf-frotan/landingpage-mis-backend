@@ -29,8 +29,8 @@ class TemplateController extends Controller
             $ext=$file->getClientOriginalExtension();
             $new_name=time().'.'.$ext;
             $file->move('assets/images/template',$new_name);
+            $data['image']=$new_name;
         }
-        $data['image']=$new_name;
         $template=Template::create($data);
         return response()->json($template);
     }

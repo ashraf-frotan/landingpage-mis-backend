@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\Country;
+use App\Models\PageType;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Template;
 
 class ProductController extends Controller
 {
@@ -27,7 +31,6 @@ class ProductController extends Controller
             'message_en'=>'required_without:message_ar',
             'page_link'=>'required|min:6',
             'page_language'=>'required'
-            
         ]);
         $product=Product::create($data);
         return response()->json($product);
@@ -59,4 +62,15 @@ class ProductController extends Controller
         $products=Product::find($id)->delete();
         return response()->json($products);
     }
+
+    // Get All Required data for creating landing page
+    public function getInfo()
+    {
+        $countries=Country::all();
+        $companies=Company::all();
+        $page_types=PageType::all();
+        $templates=Template::all();
+        return response()->json(['countries'=>$countries,'companies'=>$companies,'page_types'=>$page_types,'templates'=>$templates]);
+    }
+
 }

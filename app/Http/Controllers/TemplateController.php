@@ -11,7 +11,7 @@ class TemplateController extends Controller
     // Index
     public function index()
     {
-        $templates=Template::with('pageType')->get();
+        $templates=Template::with('company')->get();
         return response()->json($templates);
     }
 
@@ -32,7 +32,7 @@ class TemplateController extends Controller
             $data['image']=$new_name;
         }
         $template=Template::create($data);
-        $template=Template::with('pageType')->where('id',$template->id)->first();
+        $template=Template::with('company')->where('id',$template->id)->first();
         return response()->json($template);
     }
 
@@ -75,7 +75,7 @@ class TemplateController extends Controller
 
     // Filter
     public function filter(Request $request){
-        $query=Template::query()->with('pageType');
+        $query=Template::query()->with('company');
         if($request->id!=''){
             $query->where('id',$request->id);
         }

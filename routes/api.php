@@ -26,14 +26,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('country',CountryController::class);
 Route::resource('company',CompanyController::class);
-Route::resource('page_type',PageTypeController::class);
 Route::resource('template',TemplateController::class);
 Route::resource('product',ProductController::class);
 Route::resource('sub_product',SubProductController::class);
 
 Route::get('filter_country',[CountryController::class,'filter']);
 Route::get('filter_company',[CompanyController::class,'filter']);
-Route::get('filter_page_type',[PageTypeController::class,'filter']);
 Route::get('filter_template',[TemplateController::class,'filter']);
 
 Route::get('get_info',[ProductController::class,'getInfo']);

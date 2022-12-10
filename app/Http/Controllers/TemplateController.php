@@ -22,7 +22,8 @@ class TemplateController extends Controller
             'name'=>'required|min:3',
             'phone'=>'required|min:10',
             'image'=>'required',
-            'type'=>'required'
+            'type'=>'required',
+            'company_id'=>'required'
         ]);
         if($request->hasFile('image')){
             $file=$request->file('image');
@@ -42,7 +43,8 @@ class TemplateController extends Controller
         $data=$request->validate([
             'name'=>'required|min:3',
             'phone'=>'required|min:10',
-            'type'=>'required'
+            'type'=>'required',
+            'company_id'=>'required'
         ]);
         $template=Template::find($id);
         if($request->hasFile('image')){

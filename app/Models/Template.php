@@ -14,7 +14,7 @@ class Template extends Model
         return env('APP_URL').'/assets/images/template/'.$value;
     }
 
-    function pageType(){
-        return $this->belongsTo(PageType::class);
+    function company(){
+        return $this->belongsTo(Company::class);
     }
 }

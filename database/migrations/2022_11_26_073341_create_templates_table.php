@@ -18,8 +18,8 @@ class CreateTemplatesTable extends Migration
             $table->string('name',64);
             $table->string('phone',16);
             $table->string('image',64);
-            $table->unsignedBigInteger('page_type_id');
-            $table->foreign('page_type_id')->references('id')->on('page_types');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->timestamps();
         });
     }

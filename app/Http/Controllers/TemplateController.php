@@ -22,7 +22,7 @@ class TemplateController extends Controller
             'name'=>'required|min:3',
             'phone'=>'required|min:10',
             'image'=>'required',
-            'page_type_id'=>'required'
+            'type'=>'required'
         ]);
         if($request->hasFile('image')){
             $file=$request->file('image');
@@ -42,7 +42,7 @@ class TemplateController extends Controller
         $data=$request->validate([
             'name'=>'required|min:3',
             'phone'=>'required|min:10',
-            'page_type_id'=>'required'
+            'type'=>'required'
         ]);
         $template=Template::find($id);
         if($request->hasFile('image')){
@@ -79,8 +79,8 @@ class TemplateController extends Controller
         if($request->id!=''){
             $query->where('id',$request->id);
         }
-        if($request->page_type_id!=''){
-            $query->where('page_type_id',$request->page_type_id);
+        if($request->type!=''){
+            $query->where('type',$request->type);
         }
         $templates=$query->where('name','like',"%$request->name%")->where('phone','like',"%$request->phone%")->get();
         return response()->json($templates);

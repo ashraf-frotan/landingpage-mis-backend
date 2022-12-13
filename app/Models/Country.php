@@ -9,4 +9,9 @@ class Country extends Model
 {
     use HasFactory;
     protected $guarded=['sort'];
+
+    function getFlagAttribute($value)
+    {
+        return env('APP_URL').'/assets/images/flag/'.$value;
+    }
 }

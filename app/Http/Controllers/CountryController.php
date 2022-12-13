@@ -22,6 +22,7 @@ class CountryController extends Controller
             'name'=>'required|min:3',
             'code'=>'required|min:2',
             'phonecode'=>'required|min:2',
+            'flag'=>'required',
         ]);
         $country=Country::create($data);
         return response()->json($country);

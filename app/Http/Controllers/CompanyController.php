@@ -85,6 +85,7 @@ class CompanyController extends Controller
     }
 
 
+    // Get File name
     public function fileName($path)
     {
         $pos=strripos($path,'/');

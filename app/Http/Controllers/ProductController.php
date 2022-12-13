@@ -68,9 +68,8 @@ class ProductController extends Controller
     {
         $countries=Country::all();
         $companies=Company::all();
-        $page_types=PageType::all();
         $templates=Template::all();
-        return response()->json(['countries'=>$countries,'companies'=>$companies,'page_types'=>$page_types,'templates'=>$templates]);
+        return response()->json(['countries'=>$countries,'companies'=>$companies,'templates'=>$templates]);
     }
 
 }

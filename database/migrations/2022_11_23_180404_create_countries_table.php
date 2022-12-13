@@ -19,6 +19,7 @@ class CreateCountriesTable extends Migration
             $table->string('code',255);
             $table->string('phonecode',11);
             $table->integer('sort')->default(1)->nullable();
+            $table->string('flag',255);
             $table->timestamps();
         });
     }

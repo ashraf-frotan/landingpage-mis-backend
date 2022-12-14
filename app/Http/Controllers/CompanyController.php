@@ -45,7 +45,7 @@ class CompanyController extends Controller
         $company=Company::find($id);
         if($request->hasFile('logo')){
             if($company->logo!=''){
-                File::delete('assets/images/logo/'.$this->fileName($company->logo));
+                File::delete('assets/images/logo/'.fileName($company->logo));
             }
             $file=$request->file('logo');
             $ext=$file->getClientOriginalExtension();
@@ -63,7 +63,7 @@ class CompanyController extends Controller
         $companies=Company::whereIn('id',$request->all())->get();
         foreach($companies as $company){
             if($company->logo!=''){
-                File::delete('assets/images/logo/'.$this->fileName($company->logo));
+                File::delete('assets/images/logo/'.fileName($company->logo));
             }
         }
         $companies=Company::whereIn('id',$request->all())->delete();

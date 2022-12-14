@@ -83,12 +83,4 @@ class CompanyController extends Controller
        $companies=$query->where('name','like',"%$request->name%")->get();
        return response()->json($companies);
     }
-
-
-    // Get File name
-    public function fileName($path)
-    {
-        $pos=strripos($path,'/');
-        return substr($path,$pos+1);
-    }
 }

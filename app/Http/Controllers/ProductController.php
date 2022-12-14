@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Country;
-use App\Models\PageType;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Template;

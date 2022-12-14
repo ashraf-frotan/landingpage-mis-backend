@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\SellingPrice;
 use App\Models\Template;
 
 class ProductController extends Controller
@@ -32,6 +33,11 @@ class ProductController extends Controller
             'page_language'=>'required'
         ]);
         $product=Product::create($data);
+
+        foreach ($request->prices as $price) {
+            SellingPrice::create(['quantity'=>$product->id,'quantity_id'=>$price->quantity,'price'=>$price->price,'old_price'=>$price->old_price]);
+        }
+
         return response()->json($product);
     }
 

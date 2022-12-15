@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\SellingPrice;
 use App\Models\Template;
+use App\Models\SubProduct;
+
 
 class ProductController extends Controller
 {
@@ -33,9 +35,13 @@ class ProductController extends Controller
             'page_language'=>'required'
         ]);
         $product=Product::create($data);
-
+        // Store prices
         foreach ($request->prices as $price) {
             SellingPrice::create(['quantity'=>$product->id,'quantity_id'=>$price->quantity,'price'=>$price->price,'old_price'=>$price->old_price]);
+        }
+        // Store sub collection_items
+        foreach ($request->collection_items as $item) {
+            SubProduct::create(['pcode'=>$item,'product_id'=>$product->id]);
         }
 
         return response()->json($product);

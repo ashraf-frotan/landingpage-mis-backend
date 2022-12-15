@@ -16,7 +16,6 @@ class CreateSubProductsTable extends Migration
         Schema::create('sub_products', function (Blueprint $table) {
             $table->id();
             $table->string('pcode',8);
-            $table->string('title',255); 
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');    
             $table->timestamps();

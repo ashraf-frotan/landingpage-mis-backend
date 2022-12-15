@@ -44,6 +44,16 @@ class ProductController extends Controller
             SubProduct::create(['pcode'=>$item,'product_id'=>$product->id]);
         }
 
+        if($request->hasFile('logo')){
+            $file=$request->file('logo');
+            $ext=$file->getClientOriginalExtension();
+            $new_name=time().'.'.$ext;
+            $file->move('assets/images/logo',$new_name);
+            $data['logo']=$new_name;
+        }
+
+
+
         return response()->json($product);
     }
 

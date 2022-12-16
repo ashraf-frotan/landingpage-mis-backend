@@ -23,6 +23,10 @@ class ProductController extends Controller
     // Store
     public function store(Request $request)
     {
+        
+        $data=$request->landing_info;
+
+        return response()->json(json_encode($data['data']));
         $data=$request->validate([
             'pcode'=>'required|min:3',
             'title_ar'=>'required_without:title_en',

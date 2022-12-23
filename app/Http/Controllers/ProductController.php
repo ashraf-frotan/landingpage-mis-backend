@@ -45,8 +45,8 @@ class ProductController extends Controller
         $product->title_en=$data->title_en;
         $product->desc_ar=$data->desc_ar;
         $product->desc_en=$data->desc_en;
-        $product->message_ar='test message';
-        $product->message_en='message en';
+        $product->message_ar=$data->message_ar;
+        $product->message_en=$data->message_en;
         $product->page_link='test link';
         $product->sale_type=$data->sale_type;
         $product->page_language=$data->page_language;

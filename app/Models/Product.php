@@ -18,4 +18,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    function subProducts()
+    {
+        return $this->hasMany(SubProduct::class);
+    }
 }

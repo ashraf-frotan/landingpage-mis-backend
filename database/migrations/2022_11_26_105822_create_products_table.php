@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->text('desc_en')->nullable();
             $table->text('message_ar')->nullable();
             $table->text('message_en')->nullable();
-            $table->string('page_link',255);
+            $table->string('page_link',255)->unique();
             $table->tinyInteger('page_status')->nullable()->default(0)->comment('[0=>registerd, 1=>published, 2=>unpublished]');
             $table->tinyInteger('page_language')->default(1)->comment('[0=>both, 1=>arabic, 2=>english]');
             $table->boolean('is_collection')->default(0);

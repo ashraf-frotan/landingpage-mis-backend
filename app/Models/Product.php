@@ -23,4 +23,8 @@ class Product extends Model
     {
         return $this->hasMany(SubProduct::class);
     }
+
+    function template(){
+        return $this->belongsTo(Template::class);
+    }
 }

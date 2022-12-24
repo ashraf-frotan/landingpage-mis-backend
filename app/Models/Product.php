@@ -16,7 +16,7 @@ class Product extends Model
 
     function sellingPrices()
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->hasMany(SellingPrice::class);
     }
 
     function subProducts()

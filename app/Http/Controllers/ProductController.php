@@ -18,8 +18,14 @@ class ProductController extends Controller
     // Index
     public function index()
     {
-        $products=Product::with(['template'])->get();
+        $products=Product::with(['template.company'])->get();
         return response()->json($products);
+    }
+
+    public function show($slug)
+    {
+        $product=Product::with(['productImages','sellingPrices','template'])->where('page_link',$slug)->first();
+        return response()->json($product);
     }
 
     // Store

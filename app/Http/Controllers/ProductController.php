@@ -10,6 +10,7 @@ use App\Models\ProductImage;
 use App\Models\SellingPrice;
 use App\Models\Template;
 use App\Models\SubProduct;
+use Illuminate\Support\Str;
 
 
 class ProductController extends Controller
@@ -47,7 +48,7 @@ class ProductController extends Controller
         $product->desc_en=$data->desc_en;
         $product->message_ar=$data->message_ar;
         $product->message_en=$data->message_en;
-        $product->page_link='test link';
+        $product->page_link=Str::slug($data->title_en);
         $product->sale_type=$data->sale_type;
         $product->page_language=$data->page_language;
         $product->is_collection=$data->is_collection;

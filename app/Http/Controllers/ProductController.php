@@ -74,7 +74,7 @@ class ProductController extends Controller
         if($request->hasFile('s_images')){
            $files=$request->file('s_images');
            foreach ($files as $file) {
-             ProductImage::create(['name'=>$file->getClientOriginalName(),'type'=>0,'product_id'=>$product->id]);
+             ProductImage::create(['name'=>$pcode."'/S'/".$file->getClientOriginalName(),'type'=>0,'product_id'=>$product->id]);
              $file->move('assets/images/products/'.$pcode.'/S',$file->getClientOriginalName());
            }
             
@@ -82,7 +82,7 @@ class ProductController extends Controller
         if($request->hasFile('l_images')){
             $files=$request->file('l_images');
             foreach ($files as $file) {
-                ProductImage::create(['name'=>$file->getClientOriginalName(),'type'=>1,'product_id'=>$product->id]);
+                ProductImage::create(['name'=>$pcode."'/L'/".$file->getClientOriginalName(),'type'=>1,'product_id'=>$product->id]);
                 $file->move('assets/images/products/'.$pcode.'/L',$file->getClientOriginalName());
             }
         }

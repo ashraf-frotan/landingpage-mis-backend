@@ -9,4 +9,7 @@ class ProductImage extends Model
 {
     use HasFactory;
     protected $guarded = [];
+     function getNameAttribute($value){
+        return env('APP_URL').'/assets/images/products/'.$value;
+    }
 }

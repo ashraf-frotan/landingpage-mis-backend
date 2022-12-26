@@ -21,6 +21,7 @@ class TemplateController extends Controller
         $data=$request->validate([
             'name'=>'required|min:3',
             'phone'=>'required|min:10',
+            'email'=>'required|min:5',
             'image'=>'required',
             'type'=>'required',
             'company_id'=>'required'
@@ -43,6 +44,7 @@ class TemplateController extends Controller
         $data=$request->validate([
             'name'=>'required|min:3',
             'phone'=>'required|min:10',
+            'email'=>'required|min:5',
             'type'=>'required',
             'company_id'=>'required'
         ]);
@@ -84,7 +86,7 @@ class TemplateController extends Controller
         if($request->type!=''){
             $query->where('type',$request->type);
         }
-        $templates=$query->where('name','like',"%$request->name%")->where('phone','like',"%$request->phone%")->get();
+        $templates=$query->where('name','like',"%$request->name%")->where('phone','like',"%$request->phone%")->where('email','like',"%$request->email%")->get();
         return response()->json($templates);
     }
 

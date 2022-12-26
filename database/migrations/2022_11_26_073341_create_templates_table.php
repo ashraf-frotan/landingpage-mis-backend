@@ -17,6 +17,7 @@ class CreateTemplatesTable extends Migration
             $table->id();
             $table->string('name',64);
             $table->string('phone',16);
+            $table->string('email',64)->unique();
             $table->string('image',64);
             $table->unsignedBigInteger('company_id');
             $table->integer('type')->default(0)->comment('[0=>Long, 1=> Short, 2=>Whatsapp]');

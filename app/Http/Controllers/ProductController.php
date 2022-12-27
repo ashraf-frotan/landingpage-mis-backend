@@ -24,7 +24,7 @@ class ProductController extends Controller
 
     public function show($slug)
     {
-        $product=Product::with(['productImages','sellingPrices','subProducts','template'])->where('page_link',$slug)->first();
+        $product=Product::with(['productImages','sellingPrices','subProducts','template.company.country'])->where('page_link',$slug)->first();
         return response()->json($product);
     }
 

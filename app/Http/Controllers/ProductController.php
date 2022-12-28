@@ -74,7 +74,7 @@ class ProductController extends Controller
         if($request->hasFile('s_images')){
            $files=$request->file('s_images');
            foreach ($files as $file) {
-             ProductImage::create(['name'=>$pcode."'/S'/".$file->getClientOriginalName(),'type'=>0,'product_id'=>$product->id]);
+             ProductImage::create(['name'=>$pcode."/S/".$file->getClientOriginalName(),'type'=>0,'product_id'=>$product->id]);
              $file->move('assets/images/products/'.$pcode.'/S',$file->getClientOriginalName());
            }
             
@@ -82,7 +82,7 @@ class ProductController extends Controller
         if($request->hasFile('l_images')){
             $files=$request->file('l_images');
             foreach ($files as $file) {
-                ProductImage::create(['name'=>$pcode."'/L'/".$file->getClientOriginalName(),'type'=>1,'product_id'=>$product->id]);
+                ProductImage::create(['name'=>$pcode."/L/".$file->getClientOriginalName(),'type'=>1,'product_id'=>$product->id]);
                 $file->move('assets/images/products/'.$pcode.'/L',$file->getClientOriginalName());
             }
         }
@@ -110,9 +110,11 @@ class ProductController extends Controller
     }
 
     // Destroy
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        $products=Product::find($id)->delete();
+        $products=Product::whereIn('id',$request->all())->get();
+        // Please check here if the landing page has images then delete the images with pcode folder
+        $products=Product::whereIn('id',$request->all())->delete();
         return response()->json($products);
     }
 

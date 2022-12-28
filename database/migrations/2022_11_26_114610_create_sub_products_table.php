@@ -17,7 +17,7 @@ class CreateSubProductsTable extends Migration
             $table->id();
             $table->string('pcode',8);
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');    
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete()->cascadeOnUpdate();    
             $table->timestamps();
         });
     }

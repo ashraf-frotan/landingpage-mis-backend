@@ -19,6 +19,7 @@ class CreateSellingPricesTable extends Migration
             $table->integer('quantity');
             $table->float('price');
             $table->float('old_price');
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

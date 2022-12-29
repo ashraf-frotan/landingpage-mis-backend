@@ -130,4 +130,16 @@ class ProductController extends Controller
         return response()->json(['countries'=>$countries,'companies'=>$companies,'templates'=>$templates]);
     }
 
+    // Change Product Status
+    public function changeProductStatus(Request $request){
+        $status=$request->status;
+        $products=$request->selected;
+        foreach ($products as $product) {
+            $p=Product::find($product['id']);
+            $p->page_status=$status;
+            $p->update();
+        }
+        return response()->json('success');
+    }
+
 }

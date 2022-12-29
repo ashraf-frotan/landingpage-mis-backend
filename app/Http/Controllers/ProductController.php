@@ -113,7 +113,8 @@ class ProductController extends Controller
     public function destroy(Request $request,$id)
     {
         $products=Product::whereIn('id',$request->all())->get();
-        // Please check here if the landing page has images then delete the images with pcode folder
+        $folderPath=public_path('assets/images/products/'.$product->pcode);
+        File::deleteDirectory($folderPath);
         $products=Product::whereIn('id',$request->all())->delete();
         return response()->json($products);
     }

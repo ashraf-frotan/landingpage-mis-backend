@@ -92,20 +92,36 @@ class ProductController extends Controller
     // Update
     public function update(Request $request,$id)
     {
-        $data=$request->validate([
-            'pcode'=>'required|min:3',
-            'title_ar'=>'required_without:title_en',
-            'title_en'=>'required_without:title_ar',
-            'desc_ar'=>'required_without:desc_en',
-            'desc_en'=>'required_without:desc_ar',
-            'message_ar'=>'required_without:message_en',
-            'message_en'=>'required_without:message_ar',
-            'page_link'=>'required|min:6',
-            'page_language'=>'required'
+        $data=json_decode($request->landing_info);
+        return $data;
+        // $data=$request->validate([
+        //     'pcode'=>'required|min:3',
+        //     'title_ar'=>'required_without:title_en',
+        //     'title_en'=>'required_without:title_ar',
+        //     'desc_ar'=>'required_without:desc_en',
+        //     'desc_en'=>'required_without:desc_ar',
+        //     'message_ar'=>'required_without:message_en',
+        //     'message_en'=>'required_without:message_ar',
+        //     'page_link'=>'required|min:6',
+        //     'page_language'=>'required'
             
-        ]);
+        // ]);
         $product=Product::find($id);
-        $product->update($data);
+        $pcode=strtoupper($data->pcode);
+        $product->pcode=$pcode;
+        $product->title_ar=$data->title_ar;
+        $product->title_en=$data->title_en;
+        $product->desc_ar=$data->desc_ar;
+        $product->desc_en=$data->desc_en;
+        $product->message_ar=$data->message_ar;
+        $product->message_en=$data->message_en;
+        $product->page_link=Str::slug($data->title_en);
+        $product->sale_type=$data->sale_type;
+        $product->page_language=$data->page_language;
+        $product->is_collection=$data->is_collection;
+        $product->template_id=$data->template_id;
+        $product->template_id=$data->template_id;
+        $product->update();
         return response()->json($product);
     }
 

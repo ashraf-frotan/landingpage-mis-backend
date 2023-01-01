@@ -92,6 +92,7 @@ class ProductController extends Controller
     // Update
     public function update(Request $request,$id)
     {
+
         $data=json_decode($request->landing_info);
         // $data=$request->validate([
         //     'pcode'=>'required|min:3',
@@ -135,6 +136,23 @@ class ProductController extends Controller
             SubProduct::create(['pcode'=>$item,'product_id'=>$product->id]);
         }
 
+        if($request->hasFile('s_images')){
+           ProductImage::where(['product_id',$product->id,'type'=>0])->delete();
+           $files=$request->file('s_images');
+           foreach ($files as $file) {
+             ProductImage::create(['name'=>$pcode."/S/".$file->getClientOriginalName(),'type'=>0,'product_id'=>$product->id]);
+             $file->move('assets/images/products/'.$pcode.'/S',$file->getClientOriginalName());
+           }
+            
+        }
+        if($request->hasFile('l_images')){
+            ProductImage::where(['product_id',$product->id,'type'=>1])->delete();
+            $files=$request->file('l_images');
+            foreach ($files as $file) {
+                ProductImage::create(['name'=>$pcode."/L/".$file->getClientOriginalName(),'type'=>1,'product_id'=>$product->id]);
+                $file->move('assets/images/products/'.$pcode.'/L',$file->getClientOriginalName());
+            }
+        }
         return 'updated';
         return response()->json($product);
     }

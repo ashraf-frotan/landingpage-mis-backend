@@ -93,7 +93,6 @@ class ProductController extends Controller
     public function update(Request $request,$id)
     {
         $data=json_decode($request->landing_info);
-        return $data;
         // $data=$request->validate([
         //     'pcode'=>'required|min:3',
         //     'title_ar'=>'required_without:title_en',
@@ -122,6 +121,7 @@ class ProductController extends Controller
         $product->template_id=$data->template_id;
         $product->template_id=$data->template_id;
         $product->update();
+        return 'updated';
         return response()->json($product);
     }
 

@@ -62,7 +62,7 @@ class ProductController extends Controller
         $product->template_id=$data->template_id;
         $product->save();
         // Store prices
-        foreach ($data->prices as $price) {
+        foreach ($data->selling_prices as $price) {
             SellingPrice::create(['product_id'=>$product->id,'quantity'=>$price->quantity,'price'=>$price->price,'old_price'=>$price->old_price]);
         }
         // Store sub collection_items
@@ -121,6 +121,13 @@ class ProductController extends Controller
         $product->template_id=$data->template_id;
         $product->template_id=$data->template_id;
         $product->update();
+        
+        // Store prices
+        SellingPrice::where('product_id',$product->id)->delete();
+        foreach ($data->selling_prices as $price) {
+            SellingPrice::create(['product_id'=>$product->id,'quantity'=>$price->quantity,'price'=>$price->price,'old_price'=>$price->old_price]);
+        }
+
         return 'updated';
         return response()->json($product);
     }

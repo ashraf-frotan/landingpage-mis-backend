@@ -128,6 +128,13 @@ class ProductController extends Controller
             SellingPrice::create(['product_id'=>$product->id,'quantity'=>$price->quantity,'price'=>$price->price,'old_price'=>$price->old_price]);
         }
 
+        // Store sub collection_items
+        SubProduct::where('product_id',$product->id)->delete();
+        foreach ($data->collection_items as $item) {
+            $item=strtoupper($item);
+            SubProduct::create(['pcode'=>$item,'product_id'=>$product->id]);
+        }
+
         return 'updated';
         return response()->json($product);
     }

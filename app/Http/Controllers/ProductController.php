@@ -141,6 +141,8 @@ class ProductController extends Controller
 
         if($request->hasFile('s_images')){
            ProductImage::where(['product_id',$product->id,'type'=>0])->delete();
+           $folderPath=public_path('assets/images/products/'.$product->pcode.'/S');
+            File::deleteDirectory($folderPath);
            $files=$request->file('s_images');
            foreach ($files as $file) {
              ProductImage::create(['name'=>"/S/".$file->getClientOriginalName(),'type'=>0,'product_id'=>$product->id]);
@@ -150,6 +152,8 @@ class ProductController extends Controller
         }
         if($request->hasFile('l_images')){
             ProductImage::where(['product_id',$product->id,'type'=>1])->delete();
+            $folderPath=public_path('assets/images/products/'.$product->pcode.'/L');
+            File::deleteDirectory($folderPath);
             $files=$request->file('l_images');
             foreach ($files as $file) {
                 ProductImage::create(['name'=>"/L/".$file->getClientOriginalName(),'type'=>1,'product_id'=>$product->id]);

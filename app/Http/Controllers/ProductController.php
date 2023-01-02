@@ -11,6 +11,7 @@ use App\Models\SellingPrice;
 use App\Models\Template;
 use App\Models\SubProduct;
 use Illuminate\Support\Str;
+use File;
 
 
 class ProductController extends Controller
@@ -131,16 +132,14 @@ class ProductController extends Controller
         foreach ($data->selling_prices as $price) {
             SellingPrice::create(['product_id'=>$product->id,'quantity'=>$price->quantity,'price'=>$price->price,'old_price'=>$price->old_price]);
         }
-
         // Store sub collection_items
         SubProduct::where('product_id',$product->id)->delete();
         foreach ($data->collection_items as $item) {
             $item=strtoupper($item);
             SubProduct::create(['pcode'=>$item,'product_id'=>$product->id]);
         }
-
         if($request->hasFile('s_images')){
-           ProductImage::where(['product_id',$product->id,'type'=>0])->delete();
+           ProductImage::where(['product_id'=>$product->id,'type'=>0])->delete();
            $folderPath=public_path('assets/images/products/'.$product->pcode.'/S');
             File::deleteDirectory($folderPath);
            $files=$request->file('s_images');
@@ -148,10 +147,9 @@ class ProductController extends Controller
              ProductImage::create(['name'=>"/S/".$file->getClientOriginalName(),'type'=>0,'product_id'=>$product->id]);
              $file->move('assets/images/products/'.$pcode.'/S',$file->getClientOriginalName());
            }
-            
         }
         if($request->hasFile('l_images')){
-            ProductImage::where(['product_id',$product->id,'type'=>1])->delete();
+            ProductImage::where(['product_id'=>$product->id,'type'=>1])->delete();
             $folderPath=public_path('assets/images/products/'.$product->pcode.'/L');
             File::deleteDirectory($folderPath);
             $files=$request->file('l_images');
@@ -160,7 +158,6 @@ class ProductController extends Controller
                 $file->move('assets/images/products/'.$pcode.'/L',$file->getClientOriginalName());
             }
         }
-        return 'updated';
         return response()->json($product);
     }
 

@@ -107,6 +107,9 @@ class ProductController extends Controller
             
         // ]);
         $product=Product::find($id);
+        if($product->pcode!=$data->pcode){
+            rename('assets/images/products/'.$product->pcode,'assets/images/products/'.$data->pcode);
+        }
         $pcode=strtoupper($data->pcode);
         $product->pcode=$pcode;
         $product->title_ar=$data->title_ar;

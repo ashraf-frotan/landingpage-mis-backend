@@ -197,7 +197,7 @@ class ProductController extends Controller
     // Filter
     public function filter(Request $request)
     {
-        $products=Product::query()->with(['template.company']);
+        $query=Product::query()->with(['template.company']);
         $template_ids=[];
         if($request->country_id!=""){
             if($request->company_id!=""){
@@ -221,9 +221,23 @@ class ProductController extends Controller
             }
         }
 
-        return $template_ids;
-
-        return $request->all();
+        if(count($template_ids)>0){
+            $query->whereIn('template_id',$template_ids);
+        }
+        if($request->sale_type!=""){
+            $query->where('sale_type',$request->sale_type);
+        }
+        if($request->is_collection!=""){
+            $query->where('is_collection',$request->is_collection);
+        }
+        if($request->title!=""){
+            $query->where('title_en','like',"%$request->title%");
+        }
+        if($request->pcode!=""){
+            $query->where('pcode',$request->pcode);
+        }
+        $products=$query->get();
+        return response()->json($products);
     }
 
 }

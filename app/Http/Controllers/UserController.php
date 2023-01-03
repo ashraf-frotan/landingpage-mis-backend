@@ -4,26 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use File;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Index
     public function index()
     {
         $users=User::all();
         return response()->json($users);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Store
     public function store(Request $request)
     {
         $data=$request->validate([
@@ -42,38 +34,28 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Update
     public function update(Request $request, $id)
     {
-        //
+        $data=$request->validate([
+            'name'=>'required|min:3',
+            'email'=>'required|email',
+            'password'=>'required|min:6|confirmed',
+        ]);
+        $user=User::find($id);
+        if($request->hasFile('image')){
+            if($user->image!="avatar.png"){
+                File::delete('assets/images/profiles/'.$user->image);
+            }
+            $file=$request->file('image');
+            $ext=$file->getClientOriginalExtension();
+            $new_name=time().'.'.$ext;
+            $file->move('assets/images/profiles',$new_name);
+            $data['image']=$new_name;
+        }
+        $user->update($data);
+        return response()->json($user);
     }
 
     /**

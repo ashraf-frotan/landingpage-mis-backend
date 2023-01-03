@@ -17,4 +17,8 @@ class Template extends Model
     function company(){
         return $this->belongsTo(Company::class);
     }
+
+    function products(){
+        return $this->hasMany(Product::class);
+    }
 }

@@ -19,16 +19,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,7 +26,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->validate([
+            'name'=>'required|min:3',
+            'email'=>'required|email',
+            'password'=>'required|min:6|confirmed',
+        ]);
+        if($request->hasFile('image')){
+            $file=$request->file('image');
+            $ext=$file->getClientOriginalExtension();
+            $new_name=time().'.'.$ext;
+            $file->move('assets/images/profiles',$new_name);
+            $data['image']=$new_name;
+        }
+        $user=User::create($data);
+        return response()->json($user);
     }
 
     /**

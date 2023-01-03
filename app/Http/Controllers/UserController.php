@@ -58,14 +58,14 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Destroy
     public function destroy($id)
     {
-        //
+        $user=User::find($id);
+        if($user->image!="avatar.png"){
+            File::delete('assets/images/profiles/'.$user->image);
+        }
+        $user->delete();
+        return response()->json($user);
     }
 }

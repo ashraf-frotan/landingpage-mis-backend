@@ -194,4 +194,10 @@ class ProductController extends Controller
         return response()->json('success');
     }
 
+    // Filter
+    public function filter(Request $request)
+    {
+        return 'fiterfff';
+    }
+
 }

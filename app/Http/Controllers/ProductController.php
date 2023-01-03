@@ -198,19 +198,30 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         $products=Product::query()->with(['template.company']);
+        $template_ids=[];
         if($request->country_id!=""){
             if($request->company_id!=""){
                 if($request->template_id!=""){
-                    $templates=$request->template_id;
+                    array_push($template_ids,intval($request->template_id));
                 }else{
-                    $templates=Template::where('company_id',$request->company_id)->get();
+                    $templates=Template::select('id')->where('company_id',$request->company_id)->get();
+                    foreach ($templates as $template) {
+                       array_push($template_ids,$template->id);
+                    }
                 }
             }else{
-                $templates=Company::with('templates')->where('country_id',$request->country_id)->get();
+                $companies=Company::with('templates')->where('country_id',$request->country_id)->get();
+                foreach ($companies as $company) {
+                    $templates=$company['templates'];
+                    foreach ($templates as $template) {
+                        array_push($template_ids,$template->id);
+                    }
+                }
+                
             }
         }
 
-        return $templates;
+        return $template_ids;
 
         return $request->all();
     }

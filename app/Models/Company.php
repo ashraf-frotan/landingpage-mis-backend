@@ -18,4 +18,8 @@ class Company extends Model
     public function country(){
         return $this->belongsTo(Country::class);
     }
+
+    public function templates(){
+        return $this->hasMany(Template::class);
+    }
 }

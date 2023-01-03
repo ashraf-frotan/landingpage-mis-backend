@@ -15,7 +15,7 @@ class Country extends Model
         return env('APP_URL').'/assets/images/flag/'.$value;
     }
 
-    function companies(){
+    public function companies(){
         return $this->hasMany(Company::class);
     }
 }

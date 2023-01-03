@@ -8,6 +8,7 @@ use App\Http\Controllers\PageTypeController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubProductController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::resource('company',CompanyController::class);
 Route::resource('template',TemplateController::class);
 Route::resource('product',ProductController::class);
 Route::resource('sub_product',SubProductController::class);
+Route::resource('user',UserController::class);
 
 Route::get('filter_country',[CountryController::class,'filter']);
 Route::get('filter_company',[CompanyController::class,'filter']);

@@ -197,7 +197,22 @@ class ProductController extends Controller
     // Filter
     public function filter(Request $request)
     {
-        return 'fiterfff';
+        $products=Product::query()->with(['template.company']);
+        if($request->country_id!=""){
+            if($request->company_id!=""){
+                if($request->template_id!=""){
+                    $templates=$request->template_id;
+                }else{
+                    $templates=Template::where('company_id',$request->company_id)->get();
+                }
+            }else{
+                $templates=Company::with('templates')->where('country_id',$request->country_id)->get();
+            }
+        }
+
+        return $templates;
+
+        return $request->all();
     }
 
 }

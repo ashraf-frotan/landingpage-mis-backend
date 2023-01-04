@@ -21,7 +21,7 @@ class UserController extends Controller
         $data=$request->validate([
             'name'=>'required|min:3',
             'email'=>'required|email',
-            'password'=>'required|between:8,24|confirmed',
+            'password'=>'required|between:6,24|confirmed',
         ]);
         if($request->hasFile('image')){
             $file=$request->file('image');
@@ -41,7 +41,7 @@ class UserController extends Controller
         $data=$request->validate([
             'name'=>'required|min:3',
             'email'=>'required|email',
-            'password'=>'required|between:8,24|confirmed',
+            'password'=>'required|between:6,24|confirmed',
         ]);
         $user=User::find($id);
         if($request->hasFile('image')){

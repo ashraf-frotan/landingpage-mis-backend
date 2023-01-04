@@ -61,13 +61,30 @@ class UserController extends Controller
     // Destroy
     public function destroy(Request $request,$id)
     {
-        $users=User::where('id',$request->all())->get();
+        $users=User::whereIn('id',$request->all())->get();
         foreach ($users as $user) {
             if($user->image!="avatar.png"){
                 File::delete('assets/images/profiles/'.$user->image);
             }
         }
-        $users=User::where('id',$request->all())->delete();
+        $users=User::whereIn('id',$request->all())->delete();
+        return response()->json($users);
+    }
+
+    // Filter
+    public function filter(Request $request)
+    {
+        $query=User::query();
+        if($request->id!=""){
+            $query->where('id',$request->id);
+        }
+        if($request->name!=""){
+            $query->where('name','like',"%$request->name%");
+        }
+        if($request->email!=""){
+            $query->where('email',$request->email);
+        }
+        $users=$query->get();
         return response()->json($users);
     }
 }

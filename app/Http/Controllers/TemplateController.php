@@ -51,7 +51,7 @@ class TemplateController extends Controller
         $template=Template::find($id);
         if($request->hasFile('image')){
             if($template->image!=''){
-                File::delete('assets/images/template/'.fileName($template->image));
+                File::delete('assets/images/template/'.$template->image);
             }
             $file=$request->file('image');
             $ext=$file->getClientOriginalExtension();
@@ -70,7 +70,7 @@ class TemplateController extends Controller
         $templates=Template::whereIn('id',$request->all())->get();
         foreach($templates as $template){
             if($template->image!=''){
-                File::delete('assets/images/template/'.fileName($template->image));
+                File::delete('assets/images/template/'.$template->image);
             }
         }
         $templates=Template::whereIn('id',$request->all())->delete();

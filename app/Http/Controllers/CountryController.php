@@ -47,7 +47,7 @@ class CountryController extends Controller
         $country=Country::find($id);
         if($request->hasFile('flag')){
             if($country->flag!=''){
-                File::delete('assets/images/flag/'.fileName($country->flag));
+                File::delete('assets/images/flag/'.$country->flag);
             }
             $file=$request->file('flag');
             $ext=$file->getClientOriginalExtension();
@@ -65,7 +65,7 @@ class CountryController extends Controller
         $countries=Country::whereIn('id',$request->all())->get();
         foreach($countries as $country){
             if($country->flag!=''){
-                File::delete('assets/images/flag/'.fileName($country->flag));
+                File::delete('assets/images/flag/'.$country->flag);
             }
         }
         $countries=Country::whereIn('id',$request->all())->delete();

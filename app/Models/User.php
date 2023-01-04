@@ -42,7 +42,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function getImageAttribute($value){
-        return env('APP_URL').'/assets/images/profiles/'.$value;
-    }
 }

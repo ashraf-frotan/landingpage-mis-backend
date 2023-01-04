@@ -36,6 +36,7 @@ Route::get('filter_country',[CountryController::class,'filter']);
 Route::get('filter_company',[CompanyController::class,'filter']);
 Route::get('filter_template',[TemplateController::class,'filter']);
 Route::get('filter_landing_page',[ProductController::class,'filter']);
+Route::get('filter_user',[UserController::class,'filter']);
 
 Route::get('get_info',[ProductController::class,'getInfo']);
 Route::post('change_product_status',[ProductController::class,'changeProductStatus']);

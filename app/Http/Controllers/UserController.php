@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $data=$request->validate([
             'name'=>'required|min:3',
-            'email'=>'required|email',
+            'email'=>'required|email|unique:users,email',
             'password'=>'required|between:6,24|confirmed',
         ]);
         if($request->hasFile('image')){
@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         $data=$request->validate([
             'name'=>'required|min:3',
-            'email'=>'required|email',
+            'email'=>'required|email|unique:users,email,'.$id,
             'password'=>'required|between:6,24|confirmed',
         ]);
         $user=User::find($id);

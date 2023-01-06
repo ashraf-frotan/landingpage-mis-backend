@@ -13,12 +13,19 @@ class AuthController extends Controller
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
             $user = Auth::user(); 
             $success['token'] =  $user->createToken('MyApp')->plainTextToken; 
-            $success['name'] =  $user->name;
-   
-            return $this->sendResponse($success, 'User login successfully.');
+            return response()->json([$user,$success],200);
         } 
         else{ 
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+            return response()->json('fail',505);
         } 
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => 'You have successfully logged out and the token was successfully deleted'
+        ];
     }
 }

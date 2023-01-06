@@ -21,9 +21,16 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::post('register', [RegisterController::class, 'register']);
+// Route::post('login', [RegisterController::class, 'login']);
+     
+Route::middleware('auth:sanctum')->group( function () {
+    Route::resource('products', ProductController::class);
 });
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::resource('country',CountryController::class);
 Route::resource('company',CompanyController::class);

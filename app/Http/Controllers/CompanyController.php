@@ -20,6 +20,7 @@ class CompanyController extends Controller
     {
         $data=$request->validate([
             'name'=>'required|min:3',
+            'domain'=>'required|min:3',
             'logo'=>'required',
             'country_id'=>'required'
         ]);
@@ -40,6 +41,7 @@ class CompanyController extends Controller
     {
         $data=$request->validate([
             'name'=>'required|min:3',
+            'domain'=>'required|min:3',
             'country_id'=>'required'
         ]);
         $company=Company::find($id);

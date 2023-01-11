@@ -24,6 +24,7 @@ class TemplateController extends Controller
             'email'=>'required|min:5',
             'image'=>'required',
             'type'=>'required',
+            'directory'=>'required',
             'company_id'=>'required'
         ]);
         if($request->hasFile('image')){
@@ -46,6 +47,7 @@ class TemplateController extends Controller
             'phone'=>'required|min:10',
             'email'=>'required|min:5',
             'type'=>'required',
+            'directory'=>'required',
             'company_id'=>'required'
         ]);
         $template=Template::find($id);
